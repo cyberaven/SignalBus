@@ -6,24 +6,19 @@ public class Signal
     private int id = 0;
     public int Id { get => id;}
         
-    private string selfName = "";
-    public string SelfName { get => selfName;}
+    private ESignalSelfName selfName;
+    public ESignalSelfName SelfName { get => selfName;}
     
     private bool onceTime = true;
     public bool OnceTime { get => onceTime; set => onceTime = value; }
-
-
-    public Signal(int id, string selfName, bool onceTime = true)
+    
+    public Signal(ESignalSelfName selfName, bool onceTime = true)
     {
-        this.id = id;
+        this.id = SignalBus.INSTANCE.GetNextSignalId();
         this.selfName = selfName;
         this.onceTime = onceTime;
-    }    
-    private void Start()
-    {
         CheckSignalData();
     }
-
 
     private void CheckSignalData()
     {
@@ -31,7 +26,7 @@ public class Signal
         {
             DestroySelf();
         }
-        if(selfName == "")
+        if(selfName == ESignalSelfName.SDestroySignalID2)
         {
             DestroySelf();
         }
@@ -39,7 +34,7 @@ public class Signal
 
     private void DestroySelf()
     {
-        Debug.Log("I'am DestroySelf. ");// TO DO : Доделать        
+        Debug.Log("Signal DestroySelf. ID: " + this.id + " Name: " + this.SelfName);// TO DO : Доделать        
     }
 
 

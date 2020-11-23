@@ -3,25 +3,21 @@ using System.Collections;
 
 public class TestObject : MonoBehaviour, IListen
 {
-    
-    
-
     private void Start()
     {
-
         //Подписались и какой сигнал ждем
-        SignalBus.INSTANCE.RegListener(this, new Signal(666, "SecondSignal"));
+        SignalBus.INSTANCE.RegListener(this, new Signal(ESignalSelfName.SSpecialSignalID1));
         //ждем нашего сигнала
        
         //отправили сигнал
-        SignalBus.INSTANCE.ThrowSignal(new Signal(111, "FrstSignal"));
+        SignalBus.INSTANCE.ThrowSignal(new Signal(ESignalSelfName.SFrstSignalID1));
     }
    
     public void ItIsMySignal(Signal signal)
     {
         DoWork();
 
-        if (signal.SelfName == "SecondSignal")
+        if (signal.SelfName == ESignalSelfName.SDestroySignalID2)
         {
             DoAnotherWork();
         }

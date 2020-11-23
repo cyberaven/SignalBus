@@ -6,8 +6,10 @@ public class SignalBus : MonoBehaviour
 {
     public static SignalBus INSTANCE;
    
-    [SerializeField] List<Signal> currentsSignal = new List<Signal>();
-    [SerializeField] List<ListenerData> listeners = new List<ListenerData>();
+    [SerializeField] private List<Signal> currentsSignal = new List<Signal>();
+    private List<Signal> deletedSignals = new List<Signal>();    
+
+    [SerializeField] private List<ListenerData> listeners = new List<ListenerData>();
 
     private void Awake()
     {
@@ -20,7 +22,20 @@ public class SignalBus : MonoBehaviour
     }
     private void CheckListener()
     {
-        if (listeners.Count > 0 && currentsSignal.Count > 0)
+        List<int> frstList = new List<int>();
+        List<int> scndList = new List<int>();
+
+        for (int i = 0; i < frstList.Count; i++)
+        {
+            int x = scndList.BinarySearch(frstList[i]);
+            if (x >= 0)
+            {
+
+            }
+        }
+
+
+            if (listeners.Count > 0 && currentsSignal.Count > 0)
         {
             for (int i = 0; i < listeners.Count; i++)
             {
@@ -79,9 +94,13 @@ public class SignalBus : MonoBehaviour
         {
             if(signal == currentsSignal[i])
             {
-                Debug.Log("Signal Bus: Signal Delete - " + signal);
-                currentsSignal.Remove(signal);                
+                Debug.Log("Signal Bus: Signal Delete - " + signal);                
+                deletedSignals.Add(signal);
             }
         }
-    }    
+    }  
+    public int GetNextSignalId()
+    {
+        return currentsSignal.Count;
+    }
 }

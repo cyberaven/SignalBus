@@ -2,14 +2,11 @@
 using System.Collections;
 
 public class TestObject2 : MonoBehaviour, IListen
-{
-    
-    
-
+{    
     private void Start()
     {
         //Подписались и какой сигнал ждем
-        SignalBus.INSTANCE.RegListener(this, new Signal(111, "FrstSignal"));      
+        SignalBus.INSTANCE.RegListener(this, new Signal(ESignalSelfName.SFrstSignalID1));
     }
    
     public void ItIsMySignal(Signal signal) //ждем нашего сигнала
